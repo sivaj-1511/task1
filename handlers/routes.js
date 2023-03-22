@@ -3,10 +3,22 @@ import bodyParser from "body-parser"
 import { getstats } from "./stats.js"
 import { postlogin } from "./login.js"
 import { authenticateToken } from "./accesstoken.js"
+import { getAllUsers, getUserById, createUser, updateUser, deleteuser } from "./users.js"
 
 const jsonParser = bodyParser.json()
 
 export function addRoutes(app) {
-    app.post('/login', jsonParser, postlogin) 
-    app.get('/stats', authenticateToken, getstats)
+    // Login routes
+    app.post('/login', jsonParser, postlogin); 
+
+    // Statistics routes
+    app.get('/stats', authenticateToken, getstats);
+
+    // User CRUD routes
+    app.get('/user', authenticateToken, getAllUsers);
+    app.get('/user/:id', authenticateToken, getUserById);
+    app.post('/user', authenticateToken, jsonParser, createUser);
+    app.patch('/user/:id', authenticateToken,jsonParser, updateUser);
+    app.delete('/user/:id', authenticateToken, deleteuser);
+
 }
