@@ -3,7 +3,16 @@ import bodyParser from "body-parser"
 import { getstats } from "./stats.js"
 import { postlogin } from "./login.js"
 import { authenticateToken } from "./accesstoken.js"
-import { getAllUsers, getUserById, createUser, updateUser, deleteuser } from "./users.js"
+
+//CRUD import
+import {getAllUsers} from "./users/getAllUsers.js"
+import {getUserById} from "./users/getUserById.js"
+import {createUser} from "./users/createUser.js"
+import {updateUser} from "./users/updateUser.js"
+import {deleteuser} from "./users/deleteuser.js"
+
+
+
 
 const jsonParser = bodyParser.json()
 

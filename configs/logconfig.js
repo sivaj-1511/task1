@@ -13,6 +13,7 @@ const logConfiguration = {
             level:"debug",
             colorize:true
         }),
+        
         new transports.File({
             filename: 'logs/access.log'
         }),
