@@ -1,7 +1,10 @@
 import express from "express"
 import logger from "./configs/logconfig.js"
 
+// import { authenticateToken } from "./accesstoken.js"
 import { addRoutes } from "./handlers/routes.js"
+
+
 
 const port = 8080
 var app = express()

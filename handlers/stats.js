@@ -1,5 +1,6 @@
 import os from "node:os";
 import logger from "../configs/logconfig.js";
+import HttpStatus from "http-status-codes";
 
 function getUptime() {
     return `${os.uptime()} S`
@@ -30,6 +31,6 @@ export function getstats (req, res) {
         request_id : req_id
     }
     res.setHeader('content-type', 'application/json');
-    res.status(200)
+    res.status(HttpStatus.OK)
     res.send(JSON.stringify(resobj))
 }

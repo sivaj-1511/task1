@@ -5,29 +5,27 @@ import { postlogin } from "./login.js"
 import { authenticateToken } from "./accesstoken.js"
 
 //CRUD import
-import {getAllUsers} from "./users/getAllUsers.js"
-import {getUserById} from "./users/getUserById.js"
-import {createUser} from "./users/createUser.js"
-import {updateUser} from "./users/updateUser.js"
-import {deleteuser} from "./users/deleteuser.js"
-
-
-
+import daoUser from "./userhandlers.js"
 
 const jsonParser = bodyParser.json()
 
 export function addRoutes(app) {
-    // Login routes
-    app.post('/login', jsonParser, postlogin); 
+    // Add Json Parser Middleware
+    app.use(jsonParser)
 
+    // Unprotected login endpoint
+    app.post('/login', postlogin); 
+    
+    // Protect with JWT Tokens
+    // app.use(authenticateToken)
     // Statistics routes
-    app.get('/stats', authenticateToken, getstats);
+    app.get('/stats', getstats);
 
     // User CRUD routes
-    app.get('/user', authenticateToken, getAllUsers);
-    app.get('/user/:id', authenticateToken, getUserById);
-    app.post('/user', authenticateToken, jsonParser, createUser);
-    app.patch('/user/:id', authenticateToken,jsonParser, updateUser);
-    app.delete('/user/:id', authenticateToken, deleteuser);
+    app.get('/user', daoUser.getAllUsers);
+    app.get('/user/:id', daoUser.getUserById);
+    app.post('/user', daoUser.createUser);
+    app.patch('/user/:id', daoUser.updateUser);
+    app.delete('/user/:id', daoUser.deleteuser);
 
 }
