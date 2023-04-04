@@ -17,7 +17,7 @@ export function addRoutes(app) {
     app.post('/login', postlogin); 
     
     // Protect with JWT Tokens
-    // app.use(authenticateToken)
+    app.use(authenticateToken)
     // Statistics routes
     app.get('/stats', getstats);
 

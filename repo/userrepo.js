@@ -1,5 +1,6 @@
 // import db from "../configs/dbconfig.js"
 // import logger from "../configs/logconfig.js";
+import logger from "../configs/logconfig.js";
 import UserModel from "../models/usermodel.js";
 
 import md5 from "md5";
@@ -21,6 +22,9 @@ let user = {
     },
 
     daoUpdateUser : (id, oldpassword, newpassword) => {
+        UserModel.findByPk(id).then((data)=>{
+         logger.debug(JSON.stringify(data));
+        })
         return UserModel.update({pass : md5(newpassword)}, {
             where: {
                 id : id,
@@ -30,7 +34,10 @@ let user = {
     },
 
     daoDeleteUser: (id) => {
-        return UserModel.destroy({where: {id: id}})
+        return UserModel.destroy({
+            where: {id: id},
+            // truncate : true,
+        })
     }
 };
 
