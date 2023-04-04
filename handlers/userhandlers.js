@@ -57,14 +57,11 @@ let daoUser = {
                     resp.status(HttpStatus.INTERNAL_SERVER_ERROR).send() 
                 }
             ))
-
     },
 
     updateUser: (req, resp, next) => {
-        // logger.debug(JSON.stringify(req.body,null, 4))
         user.daoUpdateUser(req.params.id, req.body.oldpassword, req.body.newpassword).then((data)=>{
-            logger.debug(data);
-                if (data) {
+                if (data > 0) {
                     resp.status(HttpStatus.OK).send("Successfully updated user password")
                 } else {
                     resp.status(HttpStatus.NOT_FOUND).send("Wrong Old password")
